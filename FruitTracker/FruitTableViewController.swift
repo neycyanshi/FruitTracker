@@ -16,6 +16,9 @@ class FruitTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    // Load the sample data.
+    loadSampleFruits()
+
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
 
@@ -26,24 +29,31 @@ class FruitTableViewController: UITableViewController {
   // MARK: - Table view data source
 
   override func numberOfSections(in tableView: UITableView) -> Int {
-    // #warning Incomplete implementation, return the number of sections
-    return 0
+    return 1
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of rows
-    return 0
+    return fruits.count
   }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    // Table view cells are reused and should be dequeued using a cell identifier.
+    let cellIdentifier = "FruitTableViewCell"
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? FruitTableViewCell
+    else {
+      fatalError("The dequeued cell is not an instance of FruitTableViewCell.")
     }
-    */
+
+    // Fetches the appropriate fruit for the data source layout.
+    let fruit = fruits[indexPath.row]
+
+    // Configure the cell...
+    cell.nameLabel.text = fruit.name
+    cell.photoImageView.image = fruit.photo
+    cell.ratingControl.rating = fruit.rating
+
+    return cell
+  }
 
     /*
     // Override to support conditional editing of the table view.
@@ -89,4 +99,29 @@ class FruitTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+  // MARK: Private Methods
+
+  private func loadSampleFruits() {
+    let photo1 = UIImage(named: "fruit1")
+    let photo2 = UIImage(named: "fruit2")
+    let photo3 = UIImage(named: "fruit3")
+
+    guard let fruit1 = Fruit(name: "Caprese Salad", photo: photo1, rating: 4)
+    else {
+      fatalError("Unable to instantiate fruit1")
+    }
+
+    guard let fruit2 = Fruit(name: "Chicken and Potatoes", photo: photo2, rating: 5)
+    else {
+      fatalError("Unable to instantiate fruit2")
+    }
+
+    guard let fruit3 = Fruit(name: "Pasta with Meatballs", photo: photo3, rating: 3)
+    else {
+      fatalError("Unable to instantiate fruit3")
+    }
+
+    fruits += [fruit1, fruit2, fruit3]
+  }
 }

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FruitViewController.swift
 //  FruitTracker
 //
 //  Created by yanshi on 2018/12/13.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class FruitViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   // MARK: Properties
   
   @IBOutlet var nameTextField: UITextField!
-  @IBOutlet var mealNameLabel: UILabel!
+  // @IBOutlet var mealNameLabel: UILabel!
   @IBOutlet var photoImageView: UIImageView!
   @IBOutlet var ratingControl: RatingControl!
   
@@ -32,7 +32,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
-    mealNameLabel.text = textField.text
+    // mealNameLabel.text = textField.text
   }
   
   // MARK: UIImagePickerControllerDelegate
