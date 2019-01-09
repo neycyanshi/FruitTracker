@@ -100,6 +100,17 @@ class FruitTableViewController: UITableViewController {
     }
     */
 
+  // MARK: Actions
+
+  @IBAction func unwindToFruitList(sender: UIStoryboardSegue) {
+    if let sourceViewController = sender.source as? FruitViewController, let fruit = sourceViewController.fruit {
+      // Add a fruit
+      let newIndexPath = IndexPath(row: fruits.count, section: 0)
+      fruits.append(fruit)
+      tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
+  }
+
   // MARK: Private Methods
 
   private func loadSampleFruits() {
