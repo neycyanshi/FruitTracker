@@ -80,7 +80,19 @@ class FruitViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
   // MARK: Navigation
   
   @IBAction func cancel(_ sender: UIBarButtonItem) {
-    dismiss(animated: true, completion: nil)
+    // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+    let isPresentingInAddFruitMode = presentedViewController is UINavigationController
+    if isPresentingInAddFruitMode {
+      // The fruit detail scene was presented inside a modal navigation controller (e.g. when adding a new fruit)
+      dismiss(animated: true, completion: nil)
+    }
+    else if let owningNavigationController = navigationController {
+      // The fruit detail scene was pushed onto a navigation stack from owner navigation controller (e.g. when editing a fruit)
+      owningNavigationController.popViewController(animated: true)
+    }
+    else {
+      fatalError("The FruitViewController is not inside a naviagtion controller.")
+    }
   }
   
   // This method lets you configure a view controller before it's presented
