@@ -27,6 +27,14 @@ class FruitViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     // Handle the text field's user input through delegate callbacks
     nameTextField.delegate = self
     
+    // Set up views if editing an existing Fruit.
+    if let fruit = fruit {
+      navigationItem.title = fruit.name
+      nameTextField.text = fruit.name
+      photoImageView.image = fruit.photo
+      ratingControl.rating = fruit.rating
+    }
+    
     // Enable the Save button only if the text field has a valid Fruit name.
     updateSaveButtonState()
   }
@@ -70,6 +78,10 @@ class FruitViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
   }
   
   // MARK: Navigation
+  
+  @IBAction func cancel(_ sender: UIBarButtonItem) {
+    dismiss(animated: true, completion: nil)
+  }
   
   // This method lets you configure a view controller before it's presented
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

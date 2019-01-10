@@ -47,6 +47,7 @@
                                     <outlet property="nameLabel" destination="94r-8a-hyF" id="gQy-vi-c1p"/>
                                     <outlet property="photoImageView" destination="pfa-Ks-g5i" id="4hi-Mg-iut"/>
                                     <outlet property="ratingControl" destination="mfb-3o-0Cv" id="siC-2W-0QS"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="OgA-OP-TuO"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -75,8 +76,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0LZ-ge-OwN">
-                                <rect key="frame" x="20" y="108" width="335" height="410"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0LZ-ge-OwN">
+                                <rect key="frame" x="20" y="108" width="335" height="416"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter fruit name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1r9-Ce-dQG">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
@@ -94,8 +95,8 @@
                                             <outletCollection property="gestureRecognizers" destination="nCG-uS-xqo" appends="YES" id="5gz-NL-cUu"/>
                                         </connections>
                                     </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lYN-da-eXb" customClass="RatingControl" customModule="FruitTracker" customModuleProvider="target">
-                                        <rect key="frame" x="41.666666666666657" y="366" width="251.99999999999997" height="44"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lYN-da-eXb" customClass="RatingControl" customModule="FruitTracker" customModuleProvider="target">
+                                        <rect key="frame" x="41.666666666666657" y="366" width="251.99999999999997" height="50"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -112,7 +113,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Fruit" id="3lb-qm-9jp">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="dcB-el-cFD"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="dcB-el-cFD">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="O11-zz-Xd9"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="x5j-lE-3KA">
                             <connections>
                                 <segue destination="6Xw-Sz-t8Q" kind="unwind" unwindAction="unwindToFruitListWithSender:" id="lBo-xj-k6A"/>
@@ -170,10 +175,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1em-ix-MGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1079.2" y="132.26600985221674"/>
+            <point key="canvasLocation" x="1118" y="484"/>
         </scene>
     </scenes>
     <resources>
         <image name="defaultPhoto" width="1080" height="1080"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="OgA-OP-TuO"/>
+    </inferredMetricsTieBreakers>
 </document>
