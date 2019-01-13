@@ -2,7 +2,7 @@
 //  Fruit.swift
 //  FruitTracker
 //
-//  Created by gkw on 2018/12/28.
+//  Created by yanshi on 2018/12/28.
 //  Copyright © 2018 BodyFusion Inc. All rights reserved.
 //
 

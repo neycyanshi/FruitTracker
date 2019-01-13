@@ -2,7 +2,7 @@
 //  FruitTableViewCell.swift
 //  FruitTracker
 //
-//  Created by gkw on 2019/1/6.
+//  Created by yanshi on 2019/1/6.
 //  Copyright © 2019 BodyFusion Inc. All rights reserved.
 //
 
