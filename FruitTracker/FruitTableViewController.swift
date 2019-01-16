@@ -20,8 +20,12 @@ class FruitTableViewController: UITableViewController {
     // Use the edit button item provided by the table view controller.
     navigationItem.leftBarButtonItem = editButtonItem
 
-    // Load the sample data.
-    loadSampleFruits()
+    // Load any saved fruits, otherwise load sample data.
+    if let loadedFruits = loadFruits() {
+      fruits += loadedFruits
+    } else {
+      loadSampleFruits()
+    }
 
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
@@ -70,6 +74,7 @@ class FruitTableViewController: UITableViewController {
     if editingStyle == .delete {
       // Delete the row from the data source
       fruits.remove(at: indexPath.row)
+      saveFruits()
       tableView.deleteRows(at: [indexPath], with: .fade)
     } else if editingStyle == .insert {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -138,6 +143,9 @@ class FruitTableViewController: UITableViewController {
         fruits.append(fruit)
         tableView.insertRows(at: [newIndexPath], with: .automatic)
       }
+
+      // Save the fruits
+      saveFruits()
     }
   }
 
@@ -164,5 +172,28 @@ class FruitTableViewController: UITableViewController {
     }
 
     fruits += [fruit1, fruit2, fruit3]
+  }
+
+  private func saveFruits() {
+    do {
+      let data = try NSKeyedArchiver.archivedData(withRootObject: fruits, requiringSecureCoding: false)
+      try data.write(to: Fruit.ArchiveURL)
+      os_log("Fruits successfully saved.", log: OSLog.default, type: .debug)
+    } catch {
+      os_log("Failed to save fruits.", log: OSLog.default, type: .error)
+    }
+  }
+
+  private func loadFruits() -> [Fruit]? {
+    do {
+      let data = try Data(contentsOf: Fruit.ArchiveURL)
+      if let fruits = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Fruit] {
+        os_log("Fruits successfully loaded", log: OSLog.default, type: .debug)
+        return fruits
+      }
+    } catch {
+      os_log("Failed to load fruits.", log: OSLog.default, type: .error)
+    }
+    return nil
   }
 }

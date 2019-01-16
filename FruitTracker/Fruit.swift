@@ -67,7 +67,7 @@ class Fruit: NSObject, NSCoding {
     }
     // Because photo is an optional property of Fruit, just use conditional cast.
     let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
-    let rating = aDecoder.decodeObject(forKey: PropertyKey.rating) as! Int
+    let rating = aDecoder.decodeInteger(forKey: PropertyKey.rating)
     
     // Must call designated initializer
     self.init(name: name, photo: photo, rating: rating)
